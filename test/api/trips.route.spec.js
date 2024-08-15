@@ -69,13 +69,12 @@ describe('Pruebas sobre api de trips',()=>{
         });
     });
 
-
     describe('PUT /api/trips',()=>{
         let trip;
 
-        beorEach(async ()=>{
+        beforeEach(async ()=>{
         trip = await Trip.create({
-            name:'test trip',
+            name:'test trip3',
             description:'prueba de desc',
             destination:'berlin',
             category:'amigos',
@@ -88,7 +87,7 @@ describe('Pruebas sobre api de trips',()=>{
         });
 
         it('la ruta funciona',async ()=>{
-            const response = await request(app).put(`/api/trips/${trip._id}`).send({name:'test trip2'})
+            const response = await request(app).put(`/api/trips/${trip._id}`).send({name:'prueba de update'})
             expect(response.statusCode).toBe(200);
             expect(response.headers['content-type']).toContain('json');
         });
