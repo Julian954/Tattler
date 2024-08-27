@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 const userRoutes = require('./routes/user');
 const restaurantsRoutes = require('./routes/restaurant');
+const commentsRoutes = require('./routes/comment');
+const favoritesRoutes = require('./routes/favorite');
 
 
 
@@ -13,6 +15,8 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use('/api',userRoutes);
 app.use('/api',restaurantsRoutes);
+app.use('/api',commentsRoutes);
+app.use('/api',favoritesRoutes);
     
 
 

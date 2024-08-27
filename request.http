@@ -90,3 +90,75 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/restaurants/66caf01295c8fa42c2398d07 HTTP/1.1
+
+
+comment
+
+###
+POST http://localhost:3000/api/comments HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"66c7da758332a9a05ee5f800",
+    "restaurantId":"66cb93bab0110a0e6bf21ea4",
+    "comment":"Prueba de comentario numero 2",
+    "rating": 3.5
+
+}
+
+###
+GET http://localhost:3000/api/comments HTTP/1.1
+
+
+###
+GET http://localhost:3000/api/comments/66cd1979c6c762861fbeecb3 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/api/comments/66cd1979c6c762861fbeecb3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"66c97760d4ed89a2eb44819b",
+    "restaurantId":"66cb93bab0110a0e6bf21ea4",
+    "comment":"Prueba de comentario numero editar",
+    "rating":4
+}
+
+###
+DELETE http://localhost:3000/api/comments/66bf758244f97ab0c460759e HTTP/1.1
+
+
+
+favorites
+
+
+###
+POST http://localhost:3000/api/favorites HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"66c7da758332a9a05ee5f800",
+    "restaurantId":"66cb93bab0110a0e6bf21ea4"
+}
+
+###
+GET http://localhost:3000/api/favorites HTTP/1.1
+
+
+###
+GET http://localhost:3000/api/favorites/66cd29bc0c6a51ee461bb2c2 HTTP/1.1
+
+
+###
+PUT http://localhost:3000/api/favorites/66cd1979c6c762861fbeecb3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId":"66c97760d4ed89a2eb44819b",
+    "restaurantId":"66cb93bab0110a0e6bf21ea4"
+}
+
+###
+DELETE http://localhost:3000/api/favorites/66bfc5a944f97ab0c460759f HTTP/1.1
+
