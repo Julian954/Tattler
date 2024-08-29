@@ -11,10 +11,12 @@ router.post('/restaurants',(req,res)=>{
         console.log('Restaurante guardado:', data);
         res.json(data);
     })
-    .catch((error) => {
-        console.error('Error al guardar el restaurante:', error);
-        res.json({message:error})}
-    );
+    .catch((error) => {if (error.code === 11000) { // Código de error para duplicado
+        res.status(400).json({ message: 'El restaurante ya existe con ese nombre y ubicación.' });
+        } else {
+            res.status(500).json({ message: 'Error al guardar el restaurante.', error });
+        } 
+    });
 });
 
 //get all restaurants

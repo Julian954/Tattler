@@ -18,11 +18,11 @@ GET http://localhost:3000/api/users HTTP/1.1
 
 
 ###
-GET http://localhost:3000/api/users/66c7daf88332a9a05ee5f802 HTTP/1.1
+GET http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
 
 
 ###
-PUT http://localhost:3000/api/users/66c97760d4ed89a2eb44819b HTTP/1.1
+PUT http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/users/66c7daf88332a9a05ee5f802 HTTP/1.1
+DELETE http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
 
 
 
