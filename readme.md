@@ -1,118 +1,342 @@
-Proyecto de API REST para Gestión de Comentarios y Favoritos de Restaurantes
-Descripción
-Este proyecto es una API REST desarrollada con Node.js y Mongoose que permite la gestión de usuarios, restaurantes, comentarios y favoritos. La API permite a los usuarios crear cuentas, agregar restaurantes a su lista de favoritos, y dejar comentarios y calificaciones sobre los restaurantes.
+# Proyecto de API REST para Tattler
 
-Estructura del Proyecto
+Este proyecto es una API RESTful desarrollada con Node.js, Express y MongoDB, que permite gestionar usuarios, restaurantes, comentarios y favoritos. La API está diseñada para ofrecer una interfaz eficiente y segura para aplicaciones que requieren gestión de contenido y relaciones entre usuarios y lugares.
+
+## Características Principales ✨
+ ___Gestión de Usuarios___: Registro, actualización, visualización y eliminación de usuarios.
+ 
+ ___Gestión de Restaurantes___: Creación, actualización, visualización y eliminación de restaurantes, con validación para evitar duplicados.
+ 
+ ___Gestión de Comentarios___: Los usuarios pueden dejar comentarios y calificaciones en restaurantes.
+ 
+ ___Gestión de Favoritos___: Los usuarios pueden marcar restaurantes como favoritos para un acceso rápido.
+
+## Requisitos Previos 🛠️
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+
+
+_express_ (versión 4.19.2 o superior)
+
+_Mongoose_ (versión 8.5.3 o superior)
+
+_Dotenv_ (versión 16.4.5 o superior)
+
+_Bcrypt_ (versión 5.1.1 o superior)
+
+
+## Estructura del Proyecto
 El proyecto está organizado de la siguiente manera:
 
-Copy code
-/src
-    /models
-        comment.js
-        favorite.js
-        restaurant.js
-        user.js
-    /routes
-        commentRoutes.js
-        favoriteRoutes.js
-        restaurantRoutes.js
-        userRoutes.js
-    index.js
-/node_modules
-.env
-package.json
-package_lock.json
-requests.http
+```
+|--/src
+    |---/models
+        |---comment.js
+        |---favorite.js
+        |---restaurant.js
+        |---user.js
+    |---/routes
+        |---commentRoutes.js
+        |---favoriteRoutes.js
+        |---restaurantRoutes.js
+        |---userRoutes.js
+    |---index.js
+|--/node_modules
+|--.env
+|--package.json
+|--package_lock.json
+|--requests.http
+```
 
 
-Modelos
-User: Modelo para gestionar usuarios, con campos como name, email, password, preference, entre otros. Las contraseñas se cifran antes de ser almacenadas en la base de datos.
-Restaurant: Modelo que representa restaurantes, con detalles como name, address, altitud, longitud, horario, cuisine, y rating.
-Comment: Modelo para comentarios, permitiendo a los usuarios dejar un comentario y una calificación sobre un restaurante específico.
-Favorite: Modelo para favoritos, permitiendo a los usuarios agregar restaurantes a su lista de favoritos.
+## Instalación 🖥️
 
-Rutas
-commentRoutes.js: Maneja las rutas relacionadas con los comentarios, permitiendo crear, leer, actualizar y eliminar comentarios.
-favoriteRoutes.js: Maneja las rutas para gestionar los favoritos, permitiendo agregar y eliminar restaurantes de la lista de favoritos de un usuario.
-restaurantRoutes.js: Contiene las rutas para la gestión de restaurantes, incluyendo la creación, modificación, y consulta de restaurantes.
-userRoutes.js: Define las rutas para la gestión de usuarios, como el registro, login, y actualización de la información del usuario.
-Archivo Principal
-index.js: Es el punto de entrada de la aplicación. Aquí se configuran el servidor, la conexión a la base de datos, y se importan las rutas y modelos necesarios para que la API funcione.
-Instalación
-Clona el repositorio:
-git clone https://github.com/tu-usuario/tu-repositorio.git
+Sigue estos pasos para instalar el proyecto localmente:
 
-Navega al directorio del proyecto:
-cd tu-repositorio
-
-Instala las dependencias necesarias:
+##### 1. Clona el repositorio:
+```
+git clone https://github.com/Julian954/Tattler.git
+cd Tattler
+```
+##### 2. Instala las dependencias:
+```
 npm install
+```
+## Configuración ⚙️
+##### Configura las variables de entorno:
 
-Uso
-Configuración de la Base de Datos
-Asegúrate de tener MongoDB instalado y en ejecución. Luego, configura la URL de conexión en el archivo .env en la raíz del proyecto:
-MONGODB_URI=mongodb://localhost:27017/nombre_de_tu_base_de_datos
+Crea un archivo .env en la raíz del proyecto y añade la configuración necesaria:
+```
+PORT=3000
+MONGODB_URI= Enlace_de_conexion_con_la_base_de_datos_mongodb
+```
+## Conexión a MongoDB:
 
-Ejecución de la API
-Para ejecutar la API en modo de desarrollo:
+La aplicación se conecta automáticamente a MongoDB utilizando la URL proporcionada en el archivo .env. Si la conexión es exitosa, verás un mensaje en la consola.
 
-npm run dev
+```
+> tattler@1.0.0 start 
+> nodemon src/index.js
+
+[nodemon] 3.1.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node src/index.js`
+Server listening on port 3000
+Connected to MongoDB
+```
+
+
+## Uso 🚀
+Para iniciar la aplicación en modo de desarrollo:
+```
+npm run start
+```
 La API estará disponible en http://localhost:3000.
 
 
-Ejemplos de Uso
+## **Rutas de la API** 🌐
 
-Crear un Usuario
+| Método | Ruta | Descripción |
+| --- | --- | --- |
+| `GET` | `/api/users` | Obtiene todos los usuarios |
+| `POST` | `/api/users` | Crea un nuevo usuario |
+| `GET` | `/api/users/:id` | Obtiene un usuario por ID |
+| `PUT` | `/api/users/:id` | Actualiza un usuario por ID |
+| `DELETE` | `/api/users/:id` | Elimina un usuario por ID |
+| `GET` | `/api/restaurants` | Obtiene todos los restaurantes |
+| `POST` | `/api/restaurants` | Crea un nuevo restaurante |
+| `GET` | `/api/restaurants/:id` | Obtiene un restaurante por ID |
+| `PUT` | `/api/restaurants/:id` | Actualiza un restaurante por ID |
+| `DELETE` | `/api/restaurants/:id` | Elimina un restaurante por ID |
+| `GET` | `/api/comments` | Obtiene todos los comentarios |
+| `POST` | `/api/comments` | Crea un nuevo comentario |
+| `GET` | `/api/comments/:id` | Obtiene un comentario por ID |
+| `PUT` | `/api/comments/:id` | Actualiza un comentario por ID |
+| `DELETE` | `/api/comments/:id` | Elimina un comentario por ID |
+| `GET` | `/api/favorites` | Obtiene todos los favoritos |
+| `POST` | `/api/favorites` | Agrega un restaurante a favoritos |
+| `GET` | `/api/favorites/:id` | Obtiene un favorito por ID |
+| `DELETE` | `/api/favorites/:id` | Elimina un favorito por ID |
 
-POST /api/users
-json
-Copy code
+
+
+## Modelos
+`User`: Modelo para gestionar usuarios, con campos como name, email, password, preference, entre otros. Las contraseñas se cifran antes de ser almacenadas en la base de datos.
+
+`Restaurant`: Modelo que representa restaurantes, con detalles como name, address, altitud, longitud, horario, cuisine, y rating.
+
+`Comment`: Modelo para comentarios, permitiendo a los usuarios dejar un comentario y una calificación sobre un restaurante específico.
+
+`Favorite`: Modelo para favoritos, permitiendo a los usuarios agregar restaurantes a su lista de favoritos.
+
+## Rutas
+`commentRoutes.js`: Maneja las rutas relacionadas con los comentarios, permitiendo crear, leer, actualizar y eliminar comentarios.
+
+`favoriteRoutes.js`: Maneja las rutas para gestionar los favoritos, permitiendo agregar y eliminar restaurantes de la lista de favoritos de un usuario.
+
+`restaurantRoutes.js`: Contiene las rutas para la gestión de restaurantes, incluyendo la creación, modificación, y consulta de restaurantes.
+
+`userRoutes.js`: Define las rutas para la gestión de usuarios, como el registro, login, actualización de la información del usuario y eliminacion del usuario.
+
+## Archivo Principal
+`index.js`: Es el punto de entrada de la aplicación. Aquí se configuran el servidor, la conexión a la base de datos, y se importan las rutas y modelos necesarios para que la API funcione.
+
+## Ejemplos de Uso
+
+### Crear un Usuario
+
+`POST /api/users`
+
+example:
+```
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
 {
-  "name": "John Doe",
-  "email": "johndoe@example.com",
-  "password": "securepassword",
-  "preference": ["Italian", "Mexican"]
+    "name":"Jose chungus",
+    "email":"MetaJose@gmail.com",
+    "password":"Reparto123",
+    "preference": ["Peruana", "Brazilena"],
+    "active":true
 }
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 297
+ETag: W/"129-ob5kmrOiqzaiZshWajd+h0GKFuk"
+Date: Thu, 29 Aug 2024 17:23:47 GMT
+Connection: close
 
-Agregar un Restaurante
-
-POST /api/restaurants
-json
-Copy code
 {
-  "name": "La Pizzeria",
-  "address": "123 Main St",
-  "altitud": 34.0522,
-  "longitud": -118.2437,
-  "horario": [{"day": "Monday", "open": "9:00 AM", "close": "10:00 PM"}],
-  "cuisine": ["Italian"],
-  "rating": 4.5
+  "name": "Jose chungus",
+  "email": "MetaJose@gmail.com",
+  "password": "$2b$10$cwEkZ.jhI28LuDvg4FHfL.Yr2GecsxarkO4JJJdJDDoQNVYuGJdim",
+  "preference": [
+    "Peruana",
+    "Brazilena"
+  ],
+  "active": true,
+  "_id": "66d0aea3d5e962294af3b4cf",
+  "createdAt": "2024-08-29T17:23:47.389Z",
+  "updateDate": "2024-08-29T17:23:47.389Z",
+  "__v": 0
 }
+```
+### Mostrar Usuarios
 
-Dejar un Comentario
+`GET /api/users`
+example:
+```
+GET http://localhost:3000/api/users HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 891
+ETag: W/"37b-XG5FNoFrTgKEXbkY8GcqaKkLupg"
+Date: Thu, 29 Aug 2024 17:25:14 GMT
+Connection: close
 
-POST /api/comments
-json
-Copy code
+[
+  {
+    "_id": "66c7da758332a9a05ee5f800",
+    "name": "Julian Sanchez",
+    "email": "julian@gmail.com",
+    "password": "$2b$10$xloW7o9gIm4za30woucfiuaoht235.reRTaIPp0RxycsQ14eABVyS",
+    "preference": [
+      "italiana",
+      "mexicana"
+    ],
+    "active": true,
+    "createdAt": "2024-08-23T00:40:21.569Z",
+    "updateDate": "2024-08-23T00:40:21.569Z",
+    "__v": 0
+  },
+  {
+    "_id": "66c97760d4ed89a2eb44819b",
+    "name": "Pedro Mendez",
+    "email": "Lopster@gmail.com",
+    "password": "$2b$10$sQzGlh5cCi/E6a6M.cnh9.zHE8w6FksrhN4fUfWcXRGbLIkNt1PfK",
+    "preference": [
+      "Arabe",
+      "Italiana"
+    ],
+    "active": true,
+    "createdAt": "2024-08-24T06:02:08.745Z",
+    "updateDate": "2024-08-24T06:03:50.965Z",
+    "__v": 0
+  },
+  {
+    "_id": "66d0aea3d5e962294af3b4cf",
+    "name": "Jose chungus",
+    "email": "MetaJose@gmail.com",
+    "password": "$2b$10$cwEkZ.jhI28LuDvg4FHfL.Yr2GecsxarkO4JJJdJDDoQNVYuGJdim",
+    "preference": [
+      "Peruana",
+      "Brazilena"
+    ],
+    "active": true,
+    "createdAt": "2024-08-29T17:23:47.389Z",
+    "updateDate": "2024-08-29T17:23:47.389Z",
+    "__v": 0
+  }
+]
+```
+### Mostrar un Usuario
+
+`GET /api/users/:id`
+example:
+```
+GET http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
+```
+resultado:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 297
+ETag: W/"129-YIfnQ2Ia5RjHiYUmLetA0fAXVao"
+Date: Thu, 29 Aug 2024 17:26:25 GMT
+Connection: close
+
 {
-  "userId": "605c6b66f8a2b724d89e1e23",
-  "restaurantId": "605c6b66f8a2b724d89e1e24",
-  "comment": "Great place!",
-  "rating": 5
+  "_id": "66c7da758332a9a05ee5f800",
+  "name": "Julian Sanchez",
+  "email": "julian@gmail.com",
+  "password": "$2b$10$xloW7o9gIm4za30woucfiuaoht235.reRTaIPp0RxycsQ14eABVyS",
+  "preference": [
+    "italiana",
+    "mexicana"
+  ],
+  "active": true,
+  "createdAt": "2024-08-23T00:40:21.569Z",
+  "updateDate": "2024-08-23T00:40:21.569Z",
+  "__v": 0
 }
+```
+### Actualizar un Usuario
+`PUT /api/users/:id`
+example:
+```
+PUT http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
+Content-Type: application/json
 
-Agregar un Restaurante a Favoritos
-
-POST /api/favorites
-json
-Copy code
 {
-  "userId": "605c6b66f8a2b724d89e1e23",
-  "restaurantId": "605c6b66f8a2b724d89e1e24"
+    "name":"Pedro Mendez",
+    "email":"Lopster@gmail.com",
+    "preference": ["Arabe", "Italiana"],
+    "active":true
 }
+```
+resultado:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 92
+ETag: W/"5c-XE4LqSKK8lMBgnDPfq7vp2yCSG8"
+Date: Thu, 29 Aug 2024 17:27:28 GMT
+Connection: close
 
-Dependencias
-Node.js: Entorno de ejecución de JavaScript.
-Express: Framework para construir aplicaciones web.
-Mongoose: ODM para MongoDB.
-bcrypt: Biblioteca para cifrar contraseñas.
+{
+  "acknowledged": true,
+  "modifiedCount": 1,
+  "upsertedId": null,
+  "upsertedCount": 0,
+  "matchedCount": 1
+}
+```
+
+### Eliminar un Usuario
+
+`DELETE /api/users/:id`
+
+example:
+```
+DELETE http://localhost:3000/api/users/66cfa1b2827cc5c2000b45dd HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 38
+ETag: W/"26-fgR5yLHQ1Hpp6zDESHaY9wJreYE"
+Date: Thu, 29 Aug 2024 17:27:57 GMT
+Connection: close
+
+{
+  "acknowledged": true,
+  "deletedCount": 1
+}
+```
+
+### Nota:
+
+Para informacion mas detallada sobre el codigo puedes revisarlo en el [Notion](https://aged-halloumi-cd7.notion.site/Reto-6-ca48b7b7cbe04aeba03b4b9fe901e847?pvs=4)
