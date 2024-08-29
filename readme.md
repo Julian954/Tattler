@@ -339,4 +339,4 @@ Connection: close
 
 ### Nota:
 
-Para informacion mas detallada sobre el codigo puedes revisarlo en el [Notion](https://aged-halloumi-cd7.notion.site/Reto-6-ca48b7b7cbe04aeba03b4b9fe901e847?pvs=4)
+Para informacion mas detallada sobre el codigo puedes revisarlo en el [Notion](https://aged-halloumi-cd7.notion.site/Ciclo-2-b50def6ccbd54bcd8ae6d47676dad413)
