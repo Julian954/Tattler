@@ -106,6 +106,9 @@ La API estará disponible en http://localhost:3000.
 | `DELETE` | `/api/users/:id` | Elimina un usuario por ID |
 | `GET` | `/api/restaurants` | Obtiene todos los restaurantes |
 | `POST` | `/api/restaurants` | Crea un nuevo restaurante |
+| `GET` | `/api/restaurants/nearby` | Obtiene los restaurantes cercanos a maximo 5km |
+| `GET` | `/api/restaurants/search` | Obtiene los restaurantes buscados por nombre, tipo de comida o ambos |
+| `GET` | `/api/restaurants/filter` | Obtiene los restaurantes filtrados por nombre, tipo de comida o ambos y los ordena por distancia(asc/desc) |
 | `GET` | `/api/restaurants/:id` | Obtiene un restaurante por ID |
 | `PUT` | `/api/restaurants/:id` | Actualiza un restaurante por ID |
 | `DELETE` | `/api/restaurants/:id` | Elimina un restaurante por ID |
@@ -135,7 +138,7 @@ La API estará disponible en http://localhost:3000.
 
 `favoriteRoutes.js`: Maneja las rutas para gestionar los favoritos, permitiendo agregar y eliminar restaurantes de la lista de favoritos de un usuario.
 
-`restaurantRoutes.js`: Contiene las rutas para la gestión de restaurantes, incluyendo la creación, modificación, y consulta de restaurantes.
+`restaurantRoutes.js`: Contiene las rutas para la gestión de restaurantes, incluyendo la creación, modificación, consulta de restaurantes y eliminar restaurantes.
 
 `userRoutes.js`: Define las rutas para la gestión de usuarios, como el registro, login, actualización de la información del usuario y eliminacion del usuario.
 
@@ -335,6 +338,255 @@ Connection: close
   "acknowledged": true,
   "deletedCount": 1
 }
+```
+
+### Buscar restaurant por nombre
+
+`GET /api/restaurant/search`
+
+example:
+```
+GET http://localhost:3000/api/restaurants/search?name=Pizzeria HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 460
+ETag: W/"1cc-2kJcSHO47qB44iS6+3/dSvCQ//U"
+Date: Fri, 30 Aug 2024 00:43:31 GMT
+Connection: close
+
+[
+  {
+    "_id": "66d0fe61b580557f8d0ac17a",
+    "name": "Pizzeria EL Oxxo",
+    "address": "Av.PedroLopez#444",
+    "altitud": 40.7128,
+    "longitud": -74.006,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Italiana",
+      "Peruana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-29T23:04:01.344Z",
+    "updateDate": "2024-08-29T23:04:01.344Z",
+    "__v": 0
+  }
+]
+```
+
+### Buscar restaurant por tipo de comida
+
+`GET /api/restaurant/search`
+
+example:
+```
+GET http://localhost:3000/api/restaurants/search?cuisine=Peruana HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 455
+ETag: W/"1c7-+bknqWKmBEifRUkF205KjKnuxC8"
+Date: Fri, 30 Aug 2024 00:45:45 GMT
+Connection: close
+
+[
+  {
+    "_id": "66d0f5104d8159c42619d5af",
+    "name": "Alfonzo Cenaduria",
+    "address": "Av.PedroLopez#444",
+    "altitud": -553.2321321,
+    "longitud": 122.221,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Peruana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-29T22:24:16.789Z",
+    "updateDate": "2024-08-29T22:24:16.789Z",
+    "__v": 0
+  }
+]
+```
+
+### Buscar restaurant por nombre y tipo de cocina
+
+`GET /api/restaurant/search`
+
+example:
+```
+GET http://localhost:3000/api/restaurants/search?name=Restaurante&cuisine=Italiana HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 454
+ETag: W/"1c6-i7CtYFHofDZ7D/oXFJo4RW9TUAM"
+Date: Fri, 30 Aug 2024 00:51:02 GMT
+Connection: close
+
+[
+  {
+    "_id": "66d116deff7796eefd37e72e",
+    "name": "Restaurante Master Levnim",
+    "address": "Av.Roma#122",
+    "altitud": 40.7152,
+    "longitud": -74.0071,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Italiana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-30T00:48:30.715Z",
+    "updateDate": "2024-08-30T00:48:30.715Z",
+    "__v": 0
+  }
+]
+```
+
+### Buscar restaurantes cercanos al usuario (5km max)
+
+`GET /api/restaurant/nearby`
+
+example:
+```
+GET http://localhost:3000/api/restaurants/nearby?lat=40.7150&lon=-74.0070 HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 903
+ETag: W/"387-X+fH/o/AzxZ+w0Uvv5IlfotOslU"
+Date: Fri, 30 Aug 2024 00:52:23 GMT
+Connection: close
+
+[
+  {
+    "_id": "66d0fe61b580557f8d0ac17a",
+    "name": "Pizzeria EL Oxxo",
+    "address": "Av.PedroLopez#444",
+    "altitud": 40.7128,
+    "longitud": -74.006,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Italiana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-29T23:04:01.344Z",
+    "updateDate": "2024-08-29T23:04:01.344Z",
+    "__v": 0
+  },
+  {
+    "_id": "66d116deff7796eefd37e72e",
+    "name": "Restaurante Master Levnim",
+    "address": "Av.Roma#122",
+    "altitud": 40.7152,
+    "longitud": -74.0071,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Italiana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-30T00:48:30.715Z",
+    "updateDate": "2024-08-30T00:48:30.715Z",
+    "__v": 0
+  }
+]
+```
+
+### Buscar restaurant cercano al usuario por tipo de comida y nombre (5km max)
+
+`GET /api/restaurant/filter`
+
+example:
+```
+GET http://localhost:3000/api/restaurants/filter?name=restaurant&cuisine=Italiana&lat=40.7128&lon=-74.0060&orderByDistance=asc HTTP/1.1
+```
+respuesta:
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 454
+ETag: W/"1c6-i7CtYFHofDZ7D/oXFJo4RW9TUAM"
+Date: Fri, 30 Aug 2024 00:56:33 GMT
+Connection: close
+
+[
+  {
+    "_id": "66d116deff7796eefd37e72e",
+    "name": "Restaurante Master Levnim",
+    "address": "Av.Roma#122",
+    "altitud": 40.7152,
+    "longitud": -74.0071,
+    "horario": [
+      {
+        "lunes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "martes": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "miercoles": "8:00am-12:00pm a 2:00pm-8:00pm",
+        "jueves": "8:00am-12:00pm a 2:00pm-8:00pm"
+      }
+    ],
+    "cuisine": [
+      "Italiana"
+    ],
+    "rating": 3.5,
+    "active": true,
+    "createdAt": "2024-08-30T00:48:30.715Z",
+    "updateDate": "2024-08-30T00:48:30.715Z",
+    "__v": 0
+  }
+]
 ```
 
 ### Nota:
