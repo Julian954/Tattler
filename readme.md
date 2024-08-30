@@ -15,14 +15,17 @@ Este proyecto es una API RESTful desarrollada con Node.js, Express y MongoDB, qu
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 
-_express_ (versión 4.19.2 o superior)
+___Express___ (versión 4.19.2 o superior)
 
-_Mongoose_ (versión 8.5.3 o superior)
+___Mongoose___ (versión 8.5.3 o superior)
 
-_Dotenv_ (versión 16.4.5 o superior)
+___Dotenv___ (versión 16.4.5 o superior)
 
-_Bcrypt_ (versión 5.1.1 o superior)
+___Bcrypt___ (versión 5.1.1 o superior)
 
+Si quieres hacer uso del archivo `request.http` necesitas instalar la siguiente extension en visual studio code:
+
+___REST Client___ (versión 0.25.1 o superior)
 
 ## Estructura del Proyecto
 El proyecto está organizado de la siguiente manera:
