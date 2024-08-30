@@ -187,4 +187,4 @@ GET http://localhost:3000/api/restaurants/filter?cuisine=Italiana&lat=40.7128&lo
 GET http://localhost:3000/api/restaurants/filter?name=Pizzeria&lat=40.7128&lon=-74.0060&orderByDistance=desc HTTP/1.1
 
 ###
-GET http://localhost:3000/api/restaurants/filter?name=Pizzeria&cuisine=Italiana HTTP/1.1
+GET http://localhost:3000/api/restaurants/filter?name=Pizzeria&cuisine=Peruana HTTP/1.1
