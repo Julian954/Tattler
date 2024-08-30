@@ -1,5 +1,23 @@
 const mongoose = require('mongoose');
 
+/**
+ * @typedef {Object} Restaurant
+ * @property {String} name Nombre del restaurante. Debe ser único.
+ * @property {String} address Dirección del restaurante.
+ * @property {Number} altitud Altitud del restaurante.
+ * @property {Number} longitud Longitud del restaurante.
+ * @property {Object[]} [horario] Horario de apertura del restaurante. El formato de cada objeto en el array puede variar.
+ * @property {String[]} cuisine Tipos de cocina ofrecidos por el restaurante.
+ * @property {Number} [rating] Calificación promedio del restaurante.
+ * @property {Boolean} [active] Estado de actividad del restaurante.
+ * @property {Date} [createdAt] Fecha en la que se creó el restaurante.
+ * @property {Date} [updateDate] Fecha en la que se actualizó la información del restaurante por última vez.
+ */
+
+/**
+ * Esquema para el modelo de restaurante.
+ * @type {mongoose.Schema<Restaurant>}
+ */
 const restaurantSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,7 +38,7 @@ const restaurantSchema = new mongoose.Schema({
     },
     horario: {
         type: [Object],
-        default: true
+        default: [] // Inicializa como un array vacío
     },
     cuisine: {
         type: [String],

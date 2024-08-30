@@ -18,7 +18,7 @@ GET http://localhost:3000/api/users HTTP/1.1
 
 
 ###
-GET http://localhost:3000/api/users/66c7da758332a9a05ee5f800 HTTP/1.1
+GET http://localhost:3000/api/users/66c97760d4ed89a2eb44819b HTTP/1.1
 
 
 ###
@@ -147,7 +147,7 @@ GET http://localhost:3000/api/favorites HTTP/1.1
 
 
 ###
-GET http://localhost:3000/api/favorites/66cd29bc0c6a51ee461bb2c2 HTTP/1.1
+GET http://localhost:3000/api/favorites/66cd2a9a0c6a51ee461bb2cb HTTP/1.1
 
 
 ###
